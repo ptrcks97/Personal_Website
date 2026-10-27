@@ -1,0 +1,22 @@
+
+services:
+  web:
+    build: .
+    image: patrick-os:latest
+    container_name: patrick-os
+    restart: unless-stopped
+
+    read_only: true
+
+    tmpfs:
+      - /tmp
+
+    security_opt:
+      - no-new-privileges:true
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,150 @@
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: block;
+  background: rgba(3, 8, 3, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--p-600);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 0 1.4em;
+  padding: 0.4em var(--gutter);
+  white-space: nowrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--p-100);
+
+  .logo {
+    background: var(--p-300);
+    color: var(--bg);
+    padding: 0 0.15em;
+    text-shadow: none;
+  }
+
+  .ver {
+    font-size: 16px;
+    margin-left: 0.4em;
+  }
+
+  &:hover {
+    background: none;
+    color: var(--p-100);
+  }
+}
+
+.cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.uptime {
+  font-variant-numeric: tabular-nums;
+}
+
+.clock {
+  font-variant-numeric: tabular-nums;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.switch {
+  display: inline-flex;
+  border: 1px solid var(--p-500);
+
+  button {
+    background: none;
+    border: 0;
+    padding: 0.15em 0.6em;
+    cursor: pointer;
+    color: var(--p-500);
+    letter-spacing: 0.1em;
+
+    &.on {
+      background: var(--p-300);
+      color: var(--bg);
+      text-shadow: none;
+    }
+
+    &:hover:not(.on) {
+      color: var(--p-100);
+    }
+  }
+}
+
+.crt-toggle {
+  background: none;
+  border: 1px solid var(--p-500);
+  padding: 0.15em 0.6em;
+  cursor: pointer;
+  color: var(--p-500);
+  letter-spacing: 0.1em;
+
+  &.on {
+    color: var(--p-200);
+    border-color: var(--p-300);
+  }
+}
+
+.fkeys {
+  display: flex;
+  gap: 0.2em 1.2em;
+  padding: 0.25em var(--gutter);
+  border-top: 1px solid var(--p-700);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  a {
+    border: 0;
+    color: var(--p-400);
+    white-space: nowrap;
+
+    &:hover {
+      background: none;
+      color: var(--p-100);
+    }
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+    padding: 0 0.4em;
+    margin-right: 0.4em;
+    background: var(--p-600);
+    color: var(--p-100);
+  }
+}
+
+@media (max-width: 1100px) {
+  .node {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .uptime {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .clock,
+  .brand .ver {
+    display: none;
+  }
+}

@@ -1,0 +1,35 @@
+@if (system.booting()) {
+  <app-boot />
+} @else {
+  <app-status-bar />
+
+  <main class="dash">
+    <app-ident id="ident" class="a-ident" />
+    <app-processes class="a-proc" />
+    <app-sensors class="a-sens" />
+    <app-skills id="skills" class="a-skills" />
+    <app-career id="career" class="a-career" />
+    <app-projects id="projects" class="a-projects" />
+    <app-uplink id="uplink" class="a-uplink" />
+    <app-console id="console" class="a-console" />
+  </main>
+
+  <footer class="foot">
+    <span>© {{ year }} Patrick Schöpfer</span>
+    <span class="dim">{{ i18n.tx('Gebaut mit Angular · auf Phosphor gerendert', 'Built with Angular · rendered on phosphor') }}</span>
+    <span class="links">
+      <a class="link" href="#impressum" (click)="$event.preventDefault(); system.legalOpen.set(true)">
+        {{ i18n.tx('Impressum & Datenschutz', 'Legal & privacy') }}
+      </a>
+      <button type="button" class="link" (click)="system.reboot()">↻ reboot</button>
+    </span>
+  </footer>
+
+  <app-legal />
+
+  @if (system.unixMode()) {
+    <app-unix />
+  }
+}
+
+<div class="crt-overlay" aria-hidden="true"><span class="roll"></span></div>

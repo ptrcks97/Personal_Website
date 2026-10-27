@@ -1,0 +1,89 @@
+<app-panel index="06" [title]="i18n.tx('Projekte', 'Projects')" path="/mnt/projects" [delay]="80">
+  <p class="dim intro">
+    $ mount | grep projects &nbsp;·&nbsp; {{ projects.length }} {{ i18n.tx('Volumes eingehängt', 'volumes mounted') }}
+  </p>
+
+  <div class="grid">
+    @for (p of projects; track p.id; let i = $index) {
+      <article class="card">
+        <header>
+          <span class="dev dim">/dev/sd{{ 'abcdefgh'[i] }}</span>
+          <span class="status">{{ i18n.t(p.status) }}</span>
+        </header>
+
+        <div class="no">{{ index(i) }}</div>
+        <h3>{{ p.name }}</h3>
+        <p class="tagline">{{ i18n.t(p.tagline) }}</p>
+
+        <ul class="stack">
+          @for (s of p.stack.slice(0, 4); track s) {
+            <li class="tag">{{ s }}</li>
+          }
+          @if (p.stack.length > 4) {
+            <li class="tag dim">+{{ p.stack.length - 4 }}</li>
+          }
+        </ul>
+
+        <div class="actions">
+          <button class="btn" type="button" (click)="open(p.id)">
+            {{ i18n.tx('Details', 'Details') }} ▸
+          </button>
+          @for (l of p.links; track l.url) {
+            <a class="btn" [href]="l.url" target="_blank" rel="noopener">{{ l.label }} ↗</a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</app-panel>
+
+<dialog #dialog class="window" (click)="onDialogClick($event)" (close)="selected.set(null)">
+  @if (selected(); as p) {
+    <div class="win">
+      <header class="win-bar">
+        <span>■ {{ p.id }}.app — {{ i18n.tx('Details', 'Details') }}</span>
+        <button type="button" class="x" (click)="close()" [attr.aria-label]="i18n.tx('Schliessen', 'Close')">[X]</button>
+      </header>
+
+      <div class="win-body">
+        <span class="status">{{ i18n.t(p.status) }}</span>
+        <h3>{{ p.name }}</h3>
+        <p class="tagline">{{ i18n.t(p.tagline) }}</p>
+        <p class="desc">{{ i18n.t(p.description) }}</p>
+
+        @if (p.media.length) {
+          <div class="media">
+            @for (m of p.media; track $index) {
+              <figure>
+                @if (m.src) {
+                  <img [src]="m.src" [alt]="i18n.t(m.caption)" loading="lazy" />
+                } @else {
+                  <div class="no-signal" role="img" [attr.aria-label]="i18n.tx('Platzhalter: ', 'Placeholder: ') + i18n.t(m.caption)">
+                    <span>NO SIGNAL</span>
+                    <small>{{ i18n.tx('Bild folgt', 'Image pending') }}</small>
+                  </div>
+                }
+                <figcaption class="dim">{{ i18n.t(m.caption) }}</figcaption>
+              </figure>
+            }
+          </div>
+        }
+
+        <p class="label dim">STACK</p>
+        <ul class="stack">
+          @for (s of p.stack; track s) {
+            <li class="tag">{{ s }}</li>
+          }
+        </ul>
+
+        @if (p.links.length) {
+          <div class="actions">
+            @for (l of p.links; track l.url) {
+              <a class="btn" [href]="l.url" target="_blank" rel="noopener">{{ l.label }} ↗</a>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</dialog>

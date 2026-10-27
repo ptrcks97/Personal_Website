@@ -1,0 +1,103 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.screen {
+  height: 100%;
+  padding: var(--gutter);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &.leaving {
+    animation: power-off 0.42s ease-in forwards;
+  }
+}
+
+.log {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1.6vw, 15px);
+  line-height: 1.55;
+  color: var(--p-200);
+
+  .line {
+    min-height: 1.55em;
+  }
+
+  .txt {
+    white-space: pre-wrap;
+  }
+}
+
+.st {
+  &.ok {
+    color: var(--p-300);
+  }
+  &.info {
+    color: var(--warn);
+  }
+}
+
+.logo {
+  margin-top: 2.5rem;
+  animation: logo-in 0.5s steps(6) both;
+
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 9vw, 112px);
+    line-height: 0.95;
+    color: var(--p-100);
+    text-shadow: var(--glow-strong);
+  }
+
+  .sub {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.6vw, 28px);
+    color: var(--p-400);
+    letter-spacing: 0.18em;
+  }
+}
+
+.press {
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.1em;
+}
+
+.skip {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+}
+
+@keyframes logo-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes power-off {
+  0% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+  60% {
+    transform: scale(1, 0.006);
+    filter: brightness(3);
+  }
+  100% {
+    transform: scale(0, 0.006);
+    filter: brightness(5);
+  }
+}

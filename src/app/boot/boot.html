@@ -1,0 +1,37 @@
+<div class="screen" [class.leaving]="leaving()">
+  <div class="log" aria-live="polite">
+    @for (line of lines(); track $index) {
+      <div class="line">
+        @if (line.text === '__MEMTEST__') {
+          MEMORY TEST: <span class="hi">{{ mem().toString().padStart(6, '0') }}K</span>
+          @if (mem() >= 65536) {
+            <span class="st ok"> OK</span>
+          }
+        } @else {
+          @if (line.status === 'ok') {
+            <span class="st ok">[&#160;&#160;OK&#160;&#160;]&#160;</span>
+          } @else if (line.status === 'info') {
+            <span class="st info">[&#160;INFO&#160;]&#160;</span>
+          }
+          <span class="txt">{{ line.text }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  @if (done()) {
+    <div class="logo">
+      <div class="name">PATRICK SCHÖPFER</div>
+      <div class="sub">AI SOFTWARE ENGINEER · PS-OS v26.10</div>
+    </div>
+    <p class="press">
+      {{ i18n.tx('[ BELIEBIGE TASTE DRÜCKEN ]', '[ PRESS ANY KEY ]') }}<span class="cursor"></span>
+    </p>
+  } @else {
+    <span class="cursor"></span>
+  }
+
+  <button class="btn skip" type="button" (click)="skip()">
+    {{ i18n.tx('Überspringen', 'Skip') }} ⏭
+  </button>
+</div>

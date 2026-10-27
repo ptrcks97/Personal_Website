@@ -1,0 +1,44 @@
+<div class="top">
+  <a class="brand" href="#ident" (click)="$event.preventDefault(); system.scrollTo('ident')">
+    <span class="logo">PS</span><span class="os">-OS</span>
+    <span class="ver dim">v26.10</span>
+  </a>
+
+  <span class="cell node">
+    <span class="dim">NODE</span> morschach.ch
+  </span>
+  <span class="cell">
+    <span class="led"></span> <span class="hi">ONLINE</span>
+  </span>
+  <span class="cell uptime" [title]="i18n.tx('Seit Lehrbeginn August 2014', 'Since apprenticeship start, August 2014')">
+    <span class="dim">{{ i18n.tx('KARRIERE-UPTIME', 'CAREER UPTIME') }}</span> {{ uptime() }}
+  </span>
+
+  <span class="spacer"></span>
+
+  <span class="cell clock"><span class="dim">ZRH</span> {{ clock() }}</span>
+
+  <div class="switch" role="group" [attr.aria-label]="i18n.tx('Sprache', 'Language')">
+    <button type="button" [class.on]="i18n.lang() === 'de'" (click)="i18n.lang.set('de')">DE</button>
+    <button type="button" [class.on]="i18n.lang() === 'en'" (click)="i18n.lang.set('en')">EN</button>
+  </div>
+
+  <button
+    type="button"
+    class="crt-toggle"
+    [class.on]="system.crt()"
+    (click)="system.crt.set(!system.crt())"
+    [attr.aria-pressed]="system.crt()"
+    [title]="i18n.tx('CRT-Effekte ein/aus', 'Toggle CRT effects')"
+  >
+    CRT {{ system.crt() ? 'ON' : 'OFF' }}
+  </button>
+</div>
+
+<nav class="fkeys" [attr.aria-label]="i18n.tx('Navigation', 'Navigation')">
+  @for (item of nav; track item.id) {
+    <a [href]="'#' + item.id" (click)="$event.preventDefault(); system.scrollTo(item.id)">
+      <kbd>{{ item.key }}</kbd>{{ i18n.t(item.label) }}
+    </a>
+  }
+</nav>

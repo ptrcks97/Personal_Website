@@ -1,0 +1,68 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# Umgebungsvariablen & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Docker: lokale Overrides (z. B. andere Ports/Netzwerke pro Rechner)
+docker-compose.override.yml
+compose.override.yml
+
+# Claude Code: lokale, persönliche Einstellungen
+.claude/settings.local.json
+
+# Original-Foto im Projektstamm (die verwendete Kopie liegt in public/img/)
+/patrick.jpg

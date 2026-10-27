@@ -1,0 +1,97 @@
+<dialog
+  #dialog
+  class="window"
+  (click)="onDialogClick($event)"
+  (close)="onClosed()"
+  [attr.aria-label]="i18n.tx('Impressum', 'Legal notice')"
+>
+  <div class="win">
+    <header class="win-bar">
+      <span>■ /etc/legal — {{ i18n.tx('Impressum & Datenschutz', 'Legal notice & privacy') }}</span>
+      <button type="button" class="x" (click)="close()" [attr.aria-label]="i18n.tx('Schliessen', 'Close')">[X]</button>
+    </header>
+
+    <div class="win-body">
+      <h2>{{ i18n.tx('Impressum', 'Legal notice') }}</h2>
+
+      <section>
+        <h3>{{ i18n.tx('Verantwortlich für den Inhalt', 'Responsible for content') }}</h3>
+        <address>
+          {{ p.name }}<br />
+          @if (p.legal.street) {
+            {{ p.legal.street }}<br />
+          }
+          {{ p.legal.zip }} {{ p.legal.city }}<br />
+          {{ i18n.t(p.legal.country) }}<br />
+          <a [href]="'mailto:' + p.email">{{ p.email }}</a>
+        </address>
+        <p class="dim">
+          {{ i18n.tx(
+            'Dies ist eine private, nicht-kommerzielle Website zur persönlichen und beruflichen Vorstellung.',
+            'This is a private, non-commercial website for personal and professional introduction.'
+          ) }}
+        </p>
+      </section>
+
+      <section>
+        <h3>{{ i18n.tx('Haftungsausschluss', 'Disclaimer') }}</h3>
+        <p>
+          {{ i18n.tx(
+            'Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.',
+            'The content of this website was created with great care. However, no guarantee is given for the accuracy, completeness or timeliness of the content.'
+          ) }}
+        </p>
+      </section>
+
+      <section>
+        <h3>{{ i18n.tx('Externe Links', 'External links') }}</h3>
+        <p>
+          {{ i18n.tx(
+            'Diese Website enthält Links zu externen Websites (z. B. LinkedIn, GitHub, ' + linkLabels + '). Für deren Inhalte sind ausschliesslich die jeweiligen Betreiber verantwortlich.',
+            'This website contains links to external websites (e.g. LinkedIn, GitHub, ' + linkLabels + '). Their respective operators are solely responsible for their content.'
+          ) }}
+        </p>
+      </section>
+
+      <section>
+        <h3>{{ i18n.tx('Urheberrecht', 'Copyright') }}</h3>
+        <p>
+          {{ i18n.tx(
+            'Texte, Bilder und Gestaltung dieser Website gehören ' + p.name + '. Eine Verwendung, Vervielfältigung oder Weitergabe ist ohne vorherige schriftliche Zustimmung nicht gestattet.',
+            'Texts, images and design of this website belong to ' + p.name + '. Use, reproduction or distribution without prior written consent is not permitted.'
+          ) }}
+        </p>
+      </section>
+
+      <h2 class="sep">{{ i18n.tx('Datenschutz', 'Privacy') }}</h2>
+
+      <section>
+        <ul class="facts">
+          <li><span class="ok">[✓]</span> {{ i18n.tx('Keine Cookies', 'No cookies') }}</li>
+          <li><span class="ok">[✓]</span> {{ i18n.tx('Kein Tracking, keine Analyse-Tools', 'No tracking, no analytics') }}</li>
+          <li><span class="ok">[✓]</span> {{ i18n.tx('Keine Drittanbieter – Schriften werden selbst ausgeliefert', 'No third parties – fonts are self-hosted') }}</li>
+        </ul>
+        <p>
+          {{ i18n.tx(
+            'Ihre Einstellungen (Sprache, CRT-Effekte und ob die Boot-Sequenz bereits lief) werden ausschliesslich lokal in Ihrem Browser (localStorage/sessionStorage) gespeichert und nie übertragen. Sie können sie jederzeit über die Browser-Einstellungen löschen.',
+            'Your settings (language, CRT effects and whether the boot sequence has already run) are stored only locally in your browser (localStorage/sessionStorage) and are never transmitted. You can delete them at any time in your browser settings.'
+          ) }}
+        </p>
+        <p>
+          {{ i18n.tx(
+            'Beim Aufruf der Website verarbeitet der Webserver technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite, Browsertyp) in Server-Logfiles. Diese dienen ausschliesslich dem sicheren Betrieb und werden nicht mit anderen Daten zusammengeführt.',
+            'When you visit the website, the web server processes technically necessary data (e.g. IP address, time, requested page, browser type) in server log files. These are used solely for secure operation and are not combined with other data.'
+          ) }}
+        </p>
+        <p>
+          {{ i18n.tx(
+            'Wenn Sie mich per E-Mail kontaktieren, verwende ich Ihre Angaben nur zur Bearbeitung Ihrer Anfrage. Gemäss dem Schweizer Datenschutzgesetz (DSG) haben Sie das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten – eine E-Mail genügt.',
+            'If you contact me by email, I only use your details to handle your request. Under the Swiss Federal Act on Data Protection (FADP), you have the right to access, rectify and delete your data – an email is all it takes.'
+          ) }}
+        </p>
+      </section>
+
+      <p class="stamp dim">{{ i18n.tx('Stand', 'Last updated') }}: {{ p.legal.updated }}</p>
+    </div>
+  </div>
+</dialog>

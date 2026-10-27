@@ -1,0 +1,288 @@
+/* ==========================================================================
+   PS-OS – Phosphor-Terminal Designsystem
+   ========================================================================== */
+
+:root {
+  --bg: #030803;
+  --bg-panel: #061006;
+  --bg-raised: #0a1a0b;
+
+  --p-100: #d4ffdf; /* hellste Phosphor-Stufe, Hervorhebungen */
+  --p-200: #8dffaa; /* Fliesstext */
+  --p-300: #39ff6a; /* Akzent */
+  --p-400: #22c24d; /* sekundär */
+  --p-500: #157a31; /* gedimmt */
+  --p-600: #0d4a1e; /* Linien */
+  --p-700: #082b12; /* Flächen */
+
+  --warn: #ffb02e;
+  --alert: #ff5a4f;
+
+  --glow: 0 0 2px rgba(57, 255, 106, 0.55), 0 0 10px rgba(57, 255, 106, 0.25);
+  --glow-strong: 0 0 3px rgba(57, 255, 106, 0.8), 0 0 18px rgba(57, 255, 106, 0.45);
+
+  --font-display: 'VT323', ui-monospace, monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --gutter: clamp(12px, 2.4vw, 28px);
+  --radius: 2px;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 64px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 0%, #0b2410 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 120%, #07180a 0%, transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--p-200);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+  text-shadow: var(--glow);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--p-300);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+a {
+  color: var(--p-100);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--p-500);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--bg);
+    background: var(--p-300);
+    border-color: var(--p-300);
+    text-shadow: none;
+  }
+}
+
+:focus-visible {
+  outline: 1px solid var(--p-300);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  margin: 0;
+  color: var(--p-100);
+  letter-spacing: 0.02em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Wiederverwendbarer Terminal-Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.35em 0.9em;
+  background: transparent;
+  border: 1px solid var(--p-400);
+  border-radius: var(--radius);
+  color: var(--p-200);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: var(--glow);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    background: var(--p-300);
+    color: var(--bg);
+    text-shadow: none;
+  }
+
+  &:disabled {
+    border-style: dashed;
+    border-color: var(--p-600);
+    color: var(--p-500);
+    cursor: not-allowed;
+  }
+}
+
+a.btn {
+  border-bottom: 1px solid var(--p-400);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0 0.5em;
+  border: 1px solid var(--p-600);
+  color: var(--p-400);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.dim {
+  color: var(--p-500);
+}
+
+.hi {
+  color: var(--p-100);
+  text-shadow: var(--glow-strong);
+}
+
+.warn {
+  color: var(--warn);
+  text-shadow: 0 0 6px rgba(255, 176, 46, 0.4);
+}
+
+.led {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--p-300);
+  box-shadow: 0 0 6px var(--p-300), 0 0 12px var(--p-300);
+  animation: led-blink 2.4s steps(1) infinite;
+
+  &.warn {
+    background: var(--warn);
+    box-shadow: 0 0 6px var(--warn);
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  vertical-align: text-bottom;
+  background: var(--p-300);
+  box-shadow: var(--glow);
+  animation: led-blink 1s steps(1) infinite;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes led-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CRT-Overlay (Scanlines, Vignette, Flimmern, rollender Balken)
+   -------------------------------------------------------------------------- */
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.28) 3px
+    );
+    animation: crt-flicker 6s infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  .roll {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 18vh;
+    top: -20vh;
+    background: linear-gradient(to bottom, transparent, rgba(57, 255, 106, 0.035), transparent);
+    animation: crt-roll 9s linear infinite;
+  }
+}
+
+.crt-off {
+  .crt-overlay {
+    display: none;
+  }
+  body {
+    text-shadow: none;
+  }
+}
+
+@keyframes crt-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0.92;
+  }
+  50% {
+    opacity: 0.78;
+  }
+  52% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes crt-roll {
+  to {
+    transform: translateY(140vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .crt-overlay .roll {
+    display: none;
+  }
+}

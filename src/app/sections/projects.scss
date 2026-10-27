@@ -1,0 +1,257 @@
+:host {
+  display: block;
+}
+
+.intro {
+  margin: 0 0 1em;
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.9em 1em 1em;
+  border: 1px solid var(--p-600);
+  background: var(--bg);
+  overflow: hidden;
+  transition: border-color 0.15s, transform 0.15s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 40%, rgba(57, 255, 106, 0.08) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--p-300);
+    transform: translateY(-2px);
+
+    &::after {
+      transform: translateX(100%);
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .no {
+    position: absolute;
+    right: 0.3em;
+    top: 0.6em;
+    font-family: var(--font-display);
+    font-size: 84px;
+    line-height: 1;
+    color: var(--p-700);
+    text-shadow: none;
+    pointer-events: none;
+  }
+
+  h3 {
+    position: relative;
+    font-size: 34px;
+    margin-top: 1.3em;
+    line-height: 1;
+  }
+
+  .tagline {
+    position: relative;
+    margin: 0.35em 0 0.9em;
+    color: var(--p-300);
+    font-size: 13.5px;
+    flex: 1;
+  }
+}
+
+.status {
+  color: var(--bg);
+  background: var(--p-300);
+  padding: 0 0.45em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-shadow: none;
+}
+
+.stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  margin: 0 0 1em;
+  padding: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* ---------------- Detail-Fenster ---------------- */
+
+.window {
+  width: min(760px, calc(100vw - 24px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid var(--p-300);
+  background: var(--bg-panel);
+  color: var(--p-200);
+  box-shadow:
+    0 0 0 1px #000,
+    0 0 40px rgba(57, 255, 106, 0.25);
+
+  &[open] {
+    animation: win-open 0.28s steps(5) both;
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(2px);
+  }
+}
+
+.win-bar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em 0.8em;
+  background: var(--p-300);
+  color: var(--bg);
+  text-shadow: none;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 1;
+
+  .x {
+    background: none;
+    border: 0;
+    color: var(--bg);
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      background: var(--bg);
+      color: var(--p-300);
+    }
+  }
+}
+
+.win-body {
+  padding: clamp(16px, 3vw, 28px);
+
+  h3 {
+    font-size: clamp(38px, 6vw, 56px);
+    line-height: 1;
+    margin-top: 0.3em;
+  }
+
+  .tagline {
+    margin: 0.2em 0 1em;
+    color: var(--p-300);
+    font-family: var(--font-display);
+    font-size: 22px;
+  }
+
+  .desc {
+    max-width: 65ch;
+  }
+
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    margin: 1.4em 0 0.5em;
+  }
+}
+
+.media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1em;
+  margin: 1.4em 0 0.4em;
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--p-500);
+  }
+
+  figcaption {
+    font-size: 12px;
+    padding-top: 0.4em;
+  }
+}
+
+.no-signal {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border: 1px dashed var(--p-500);
+  background-color: #020502;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 1 0 0 0 0 0.4 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: static-noise 0.35s steps(3) infinite;
+
+  span {
+    font-family: var(--font-display);
+    font-size: 34px;
+    color: var(--p-100);
+    background: var(--bg);
+    padding: 0 0.3em;
+  }
+
+  small {
+    margin-top: 0.3em;
+    color: var(--p-400);
+    background: var(--bg);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+}
+
+@keyframes static-noise {
+  0% {
+    background-position: 0 0;
+  }
+  33% {
+    background-position: 37px -61px;
+  }
+  66% {
+    background-position: -53px 29px;
+  }
+}
+
+@keyframes win-open {
+  from {
+    opacity: 0;
+    transform: scale(0.96, 0.02);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

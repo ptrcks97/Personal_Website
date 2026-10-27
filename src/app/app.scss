@@ -1,0 +1,87 @@
+.dash {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas:
+    'ident ident ident ident ident ident proc proc proc sens sens sens'
+    'skills skills skills skills skills career career career career career career career'
+    'projects projects projects projects projects projects projects projects projects projects projects projects'
+    'uplink uplink uplink uplink uplink console console console console console console console';
+  gap: var(--gutter);
+  padding: var(--gutter);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.a-ident {
+  grid-area: ident;
+}
+.a-proc {
+  grid-area: proc;
+}
+.a-sens {
+  grid-area: sens;
+}
+.a-skills {
+  grid-area: skills;
+}
+.a-career {
+  grid-area: career;
+}
+.a-projects {
+  grid-area: projects;
+}
+.a-uplink {
+  grid-area: uplink;
+}
+.a-console {
+  grid-area: console;
+}
+
+@media (max-width: 1280px) {
+  .dash {
+    grid-template-areas:
+      'ident ident ident ident ident ident ident ident proc proc proc proc'
+      'sens sens sens sens skills skills skills skills skills skills skills skills'
+      'career career career career career career career career career career career career'
+      'projects projects projects projects projects projects projects projects projects projects projects projects'
+      'uplink uplink uplink uplink uplink console console console console console console console';
+  }
+}
+
+@media (max-width: 900px) {
+  .dash {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'ident' 'proc' 'skills' 'career' 'projects' 'sens' 'uplink' 'console';
+  }
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5em 1.5em;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--gutter);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+
+  .links {
+    display: inline-flex;
+    gap: 1.5em;
+  }
+
+  .link {
+    background: none;
+    border: 0;
+    font-size: inherit;
+    padding: 0;
+    color: var(--p-400);
+    cursor: pointer;
+    letter-spacing: inherit;
+
+    &:hover {
+      color: var(--p-100);
+    }
+  }
+}

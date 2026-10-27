@@ -1,0 +1,35 @@
+<header class="head">
+  <div>
+    <h2>IT'S A UNIX SYSTEM!</h2>
+    <p>I KNOW THIS!</p>
+  </div>
+  <button class="btn" type="button" (click)="close()">ESC · {{ i18n.tx('Beenden', 'Exit') }}</button>
+</header>
+
+<div class="stage">
+  <div class="floor">
+    @for (b of blocks; track b.id) {
+      <button
+        type="button"
+        class="block"
+        [style.left.px]="b.x"
+        [style.top.px]="b.y"
+        [style.--h]="b.h + 'px'"
+        (click)="go(b.id)"
+        [attr.aria-label]="b.label"
+      >
+        <span class="face top"></span>
+        <span class="face front"></span>
+        <span class="face side"></span>
+        <span class="label">{{ b.label }}</span>
+      </button>
+    }
+    <svg class="wires" viewBox="0 0 800 800" aria-hidden="true">
+      @for (b of blocks.slice(1); track b.id) {
+        <line x1="400" y1="400" [attr.x2]="b.x + 60" [attr.y2]="b.y + 60" />
+      }
+    </svg>
+  </div>
+</div>
+
+<p class="hint">{{ i18n.tx('Block anklicken, um das Verzeichnis zu öffnen', 'Click a block to open its directory') }}</p>

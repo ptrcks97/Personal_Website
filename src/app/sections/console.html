@@ -1,0 +1,34 @@
+<app-panel index="08" [title]="i18n.tx('Konsole', 'Console')" path="/dev/tty1" [delay]="160" statusText="READY">
+  <div class="screen" #screen (click)="focus()">
+    @for (line of lines(); track $index) {
+      <div class="line" [class]="'line ' + (line.kind ?? '')">
+        @if (line.href) {
+          <a [href]="line.href" target="_blank" rel="noopener">{{ line.text }}</a>
+        } @else {
+          <span>{{ line.text }}</span>
+        }
+      </div>
+    }
+    <form class="prompt" (submit)="$event.preventDefault(); run()">
+      <label for="console-input">guest&#64;ps-os:~$</label>
+      <input
+        #field
+        id="console-input"
+        type="text"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        [value]="input()"
+        (input)="input.set(field.value)"
+        (keydown)="onKey($event)"
+        [attr.aria-label]="i18n.tx('Befehl eingeben', 'Enter command')"
+      />
+    </form>
+  </div>
+  <div class="chips">
+    <span class="dim">{{ i18n.tx('Schnellbefehle:', 'Quick commands:') }}</span>
+    @for (c of ['help', 'whoami', 'projects', 'contact', 'sudo hire patrick']; track c) {
+      <button type="button" class="chip" (click)="input.set(c); run()">{{ c }}</button>
+    }
+  </div>
+</app-panel>

@@ -1,0 +1,11 @@
+node_modules
+dist
+.angular
+.vscode
+.git
+*.log
+Dockerfile
+docker-compose.yml
+.dockerignore
+README.md
+patrick.jpg
