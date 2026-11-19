@@ -243,9 +243,9 @@
 
   img {
     display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
     border: 1px solid var(--p-500);
   }
 

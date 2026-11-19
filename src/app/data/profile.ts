@@ -254,7 +254,16 @@ export const PROFILE = {
         date: '2026',
         url: 'https://www.luzernerzeitung.ch/zentralschweiz/kanton-luzern/wilhelm-tell-luzerner-student-bringt-nationalheld-zum-reden-ld.4199345',
       },
-      media: [{ src: null, caption: { de: 'Screenshot der Applikation', en: 'Application screenshot' } }],
+      media: [
+        {
+          src: 'projects/tell/tell-presse.jpg',
+          caption: {
+            de: 'Mit VR-Brille und dem KI-Tell auf dem Laptop · Bild: Patrick Hürlimann / Luzerner Zeitung',
+            en: 'With VR headset and the AI Tell on the laptop · Photo: Patrick Hürlimann / Luzerner Zeitung',
+          },
+        },
+        { src: null, caption: { de: 'Screenshot der Applikation', en: 'Application screenshot' } },
+      ],
     },
     {
       id: 'fotobox',
