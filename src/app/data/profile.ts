@@ -262,7 +262,6 @@ export const PROFILE = {
             en: 'With VR headset and the AI Tell on the laptop · Photo: Patrick Hürlimann / Luzerner Zeitung',
           },
         },
-        { src: null, caption: { de: 'Screenshot der Applikation', en: 'Application screenshot' } },
       ],
     },
     {
