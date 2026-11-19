@@ -66,3 +66,6 @@ compose.override.yml
 
 # Original-Foto im Projektstamm (die verwendete Kopie liegt in public/img/)
 /patrick.jpg
+
+# Presse-Screenshot (Rechte beim Verlag – nur mit Erlaubnis veröffentlichen)
+/zeitungsartikel.jpg

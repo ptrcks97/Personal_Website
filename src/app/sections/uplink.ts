@@ -38,6 +38,8 @@ import { Panel } from '../ui/panel';
         </li>
       </ul>
 
+      <p class="refs dim">{{ i18n.tx('Referenzen gebe ich gerne auf Anfrage bekannt.', 'References are available on request.') }}</p>
+
       @if (p.cv.available) {
         <div class="cv">
           <div>
@@ -88,6 +90,10 @@ import { Panel } from '../ui/panel';
         font-size: 11px;
         letter-spacing: 0.1em;
       }
+    }
+    .refs {
+      margin: -0.4em 0 1.2em;
+      font-size: 13px;
     }
     .copy {
       background: none;

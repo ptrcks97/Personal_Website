@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { SystemState } from '../core/system';
 import { I18n } from '../core/i18n';
+import { PROFILE } from '../data/profile';
 
 interface BootLine {
   text: string;
@@ -17,10 +18,7 @@ const SCRIPT: { text: string; status?: 'ok' | 'info'; delay: number }[] = [
   { text: '  /dev/dog0 ....................... (good dog)', status: 'ok', delay: 140 },
   { text: 'Mounting /home/patrick ............', status: 'ok', delay: 200 },
   { text: 'Loading kernel: ai-software-engineer-2026.09', status: 'info', delay: 260 },
-  { text: 'Started friendliness.service', status: 'ok', delay: 90 },
-  { text: 'Started ambition.service', status: 'ok', delay: 90 },
-  { text: 'Started helpfulness.service', status: 'ok', delay: 90 },
-  { text: 'Started diligence.service', status: 'ok', delay: 90 },
+  ...PROFILE.traits.map((t) => ({ text: `Started ${t.proc}`, status: 'ok' as const, delay: 90 })),
   { text: 'Reached target: dashboard.target', status: 'ok', delay: 240 },
 ];
 

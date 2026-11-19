@@ -40,6 +40,8 @@ export interface Project {
   status: L;
   links: { label: string; url: string }[];
   media: ProjectMedia[];
+  /** Presseartikel – wird als Karte mit Link zum Original angezeigt */
+  press?: { outlet: string; title: string; date: string; url: string };
 }
 
 export const PROFILE = {
@@ -88,12 +90,49 @@ export const PROFILE = {
     { de: 'Französisch (Schulkenntnisse)', en: 'French (basic)' },
   ] as L[],
 
+  /** Arbeitsweise als systemd-Units – jede mit einer Zeile, die sie belegt. */
   traits: [
-    { proc: 'friendliness.d', label: { de: 'Freundlich', en: 'Friendly' } },
-    { proc: 'ambition.d', label: { de: 'Ehrgeizig', en: 'Ambitious' } },
-    { proc: 'helpfulness.d', label: { de: 'Hilfsbereit', en: 'Helpful' } },
-    { proc: 'diligence.d', label: { de: 'Pflichtbewusst', en: 'Conscientious' } },
-  ],
+    {
+      proc: 'pragmatism.service',
+      label: { de: 'Pragmatisch', en: 'Pragmatic' },
+      desc: {
+        de: 'Schnell zum funktionierenden Prototyp, dann iterieren.',
+        en: 'Get to a working prototype fast, then iterate.',
+      },
+    },
+    {
+      proc: 'teaching.service',
+      label: { de: 'Erklären können', en: 'Explaining clearly' },
+      desc: {
+        de: 'Komplexes verständlich machen – geprägt durch die PH Luzern.',
+        en: 'Making complex things understandable – shaped by teacher training at PH Luzern.',
+      },
+    },
+    {
+      proc: 'responsible-ai.service',
+      label: { de: 'Verantwortungsvolle KI', en: 'Responsible AI' },
+      desc: {
+        de: 'Sorgfältig mit Daten, Tests und den Grenzen von KI.',
+        en: 'Careful with data, testing and the limits of AI.',
+      },
+    },
+    {
+      proc: 'curiosity.service',
+      label: { de: 'Neugierig', en: 'Curious' },
+      desc: {
+        de: 'Neues ausprobieren – von LLMs bis Raspberry Pi.',
+        en: 'Trying new things – from LLMs to Raspberry Pi.',
+      },
+    },
+    {
+      proc: 'teamwork.service',
+      label: { de: 'Teamorientiert', en: 'Team player' },
+      desc: {
+        de: 'Hilfsbereit, Wissen teilen, Feedback geben und annehmen.',
+        en: 'Helpful, sharing knowledge, giving and taking feedback.',
+      },
+    },
+  ] as { proc: string; label: L; desc: L }[],
 
   languages: [
     { name: 'Python', level: 'expert' },
@@ -198,16 +237,24 @@ export const PROFILE = {
         en: 'Wilhelm Tell as an AI conversation partner',
       },
       description: {
-        de: 'Ein Gespräch mit der Schweizer Legende: Die Tell Experience lässt Wilhelm Tell als KI-Charakter lebendig werden. Statt Geschichte aus dem Lehrbuch zu lesen, stellt man ihm Fragen und erlebt sie im Dialog. Das Projekt hat es bis in die Zeitung geschafft.',
-        en: 'A conversation with a Swiss legend: Tell Experience brings Wilhelm Tell to life as an AI character. Instead of reading history from a textbook, you ask him questions and experience it through dialogue. The project even made it into the newspaper.',
+        de: 'Meine Bachelorarbeit an der HSLU: ein virtueller Wilhelm Tell, mit dem man per VR-Brille am Tisch in seinem Haus sitzt und sich unterhält. Das KI-System dahinter habe ich selbst gebaut – mit Schillers «Wilhelm Tell» als Wissensbasis und Leitplanken, etwa gegen explizite Gewaltschilderungen. Avatar und Umgebung habe ich selbst modelliert und programmiert. In einer Nutzerstudie mit rund 20 Personen wurde die VR-Version signifikant besser bewertet als eine reine Audio-Version.',
+        en: 'My bachelor thesis at HSLU: a virtual Wilhelm Tell you sit across the table from in VR and talk to. I built the AI system behind it myself – grounded in Schiller’s play «Wilhelm Tell», with guardrails such as no explicit descriptions of violence. I modelled and programmed the avatar and environment myself. In a user study with around 20 participants, the VR version was rated significantly better than an audio-only version.',
       },
-      stack: ['Conversational AI', 'LLM', 'AI Agents', 'Storytelling'],
+      stack: ['VR', 'LLM', 'Conversational AI', 'Guardrails', '3D Modelling', 'User Study'],
       status: { de: 'IN DER PRESSE', en: 'FEATURED IN PRESS' },
-      links: [],
-      media: [
-        { src: null, caption: { de: 'Screenshot der Applikation', en: 'Application screenshot' } },
-        { src: null, caption: { de: 'Zeitungsartikel', en: 'Newspaper article' } },
+      links: [
+        {
+          label: 'Luzerner Zeitung',
+          url: 'https://www.luzernerzeitung.ch/zentralschweiz/kanton-luzern/wilhelm-tell-luzerner-student-bringt-nationalheld-zum-reden-ld.4199345',
+        },
       ],
+      press: {
+        outlet: 'Luzerner Zeitung',
+        title: 'Jetzt spricht Wilhelm Tell',
+        date: '2026',
+        url: 'https://www.luzernerzeitung.ch/zentralschweiz/kanton-luzern/wilhelm-tell-luzerner-student-bringt-nationalheld-zum-reden-ld.4199345',
+      },
+      media: [{ src: null, caption: { de: 'Screenshot der Applikation', en: 'Application screenshot' } }],
     },
     {
       id: 'fotobox',

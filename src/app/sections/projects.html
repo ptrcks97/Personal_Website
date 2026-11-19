@@ -51,6 +51,17 @@
         <p class="tagline">{{ i18n.t(p.tagline) }}</p>
         <p class="desc prose">{{ i18n.t(p.description) }}</p>
 
+        @if (p.press; as pr) {
+          <a class="press" [href]="pr.url" target="_blank" rel="noopener">
+            <span class="press-meta">
+              <span class="press-tag">{{ i18n.tx('PRESSE', 'PRESS') }}</span>
+              {{ pr.outlet }} · {{ pr.date }}
+            </span>
+            <span class="press-title">«{{ pr.title }}»</span>
+            <span class="press-cta">{{ i18n.tx('Artikel lesen', 'Read the article') }} ↗</span>
+          </a>
+        }
+
         @if (p.media.length) {
           <div class="media">
             @for (m of p.media; track $index) {

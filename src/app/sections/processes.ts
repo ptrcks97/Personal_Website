@@ -3,7 +3,7 @@ import { I18n } from '../core/i18n';
 import { PROFILE } from '../data/profile';
 import { Panel } from '../ui/panel';
 
-/** Arbeitsweise als laufende Daemon-Prozesse, optional mit Referenz-Zitat. */
+/** Arbeitsweise als systemd-Units, jede mit Begründung; optional mit Referenz-Zitat. */
 @Component({
   selector: 'app-processes',
   imports: [Panel],
@@ -12,9 +12,13 @@ import { Panel } from '../ui/panel';
       <ul class="units">
         @for (t of traits; track t.proc) {
           <li>
-            <span class="ok">●</span>
-            <span class="label">{{ i18n.t(t.label) }}</span>
-            <span class="proc">{{ t.proc }}</span>
+            <div class="head">
+              <span class="ok">●</span>
+              <span class="proc">{{ t.proc }}</span>
+              <span class="state">active (running)</span>
+            </div>
+            <div class="label">{{ i18n.t(t.label) }}</div>
+            <div class="desc"><span class="tree">└</span><span>{{ i18n.t(t.desc) }}</span></div>
           </li>
         }
       </ul>
@@ -24,8 +28,6 @@ import { Panel } from '../ui/panel';
           <blockquote>«{{ i18n.t(q.text) }}»</blockquote>
           <figcaption>— {{ q.author }}, <span class="dim">{{ i18n.t(q.role) }}</span></figcaption>
         </figure>
-      } @else {
-        <p class="refs dim">{{ i18n.tx('Referenzen gebe ich gerne auf Anfrage bekannt.', 'References are available on request.') }}</p>
       }
     </app-panel>
   `,
@@ -42,30 +44,50 @@ import { Panel } from '../ui/panel';
       padding: 0;
 
       li {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: baseline;
-        gap: 0.75em;
-        padding: 0.5em 0.2em;
+        padding: 0.55em 0.2em 0.6em;
         border-bottom: 1px dashed var(--p-700);
+
+        &:first-child {
+          padding-top: 0;
+        }
       }
+    }
+    .head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6em;
+      font-size: 12px;
     }
     .ok {
       color: var(--p-300);
     }
+    .proc {
+      color: var(--p-400);
+    }
+    .state {
+      margin-left: auto;
+      color: var(--p-500);
+      white-space: nowrap;
+    }
     .label {
       font-family: var(--font-display);
-      font-size: 26px;
-      line-height: 1.05;
+      font-size: 25px;
+      line-height: 1.1;
       color: var(--p-100);
+      padding-left: 1.2em;
     }
-    .proc {
+    .desc {
+      display: flex;
+      gap: 0.45em;
+      padding-left: 1.2em;
+      font-family: var(--font-prose);
+      font-size: 14px;
+      color: var(--p-200);
+      text-shadow: none;
+    }
+    .tree {
+      font-family: var(--font-mono);
       color: var(--p-500);
-      font-size: 12px;
-    }
-    .refs {
-      margin: 1.2em 0 0;
-      font-size: 13px;
     }
     .quote {
       margin: 1.2em 0 0;
