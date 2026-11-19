@@ -7,7 +7,8 @@ import { Panel } from '../ui/panel';
   selector: 'app-sensors',
   imports: [Panel],
   template: `
-    <app-panel index="03" [title]="i18n.tx('Sensoren', 'Sensors')" path="/dev/outdoor" [delay]="240">
+    <app-panel index="08" [title]="i18n.tx('Offline-Modus', 'Offline mode')" path="/dev/outdoor" [delay]="80">
+      <div class="wrap">
       <div class="trail" aria-hidden="true">
         <svg viewBox="0 0 300 120">
           <defs>
@@ -42,13 +43,18 @@ import { Panel } from '../ui/panel';
       <dl class="readout">
         <dt>{{ i18n.tx('HABITAT', 'HABITAT') }}</dt>
         <dd>{{ i18n.tx('Morschach · über dem Vierwaldstättersee', 'Morschach · above Lake Lucerne') }}</dd>
-        <dt>{{ i18n.tx('AKTIVITÄT', 'ACTIVITY') }}</dt>
-        <dd>{{ i18n.tx('Wandern · Natur', 'Hiking · nature') }}</dd>
+        <dt>{{ i18n.tx('OUTDOOR', 'OUTDOOR') }}</dt>
+        <dd>{{ i18n.tx('Spaziergänge, Wanderungen & Bergtouren', 'Walks, hikes & mountain tours') }}</dd>
         <dt>{{ i18n.tx('BEGLEITUNG', 'COMPANION') }}</dt>
         <dd><span class="led"></span> /dev/dog0 · {{ i18n.tx('Hund', 'Dog') }} · ONLINE</dd>
+        <dt>{{ i18n.tx('LABOR', 'LAB') }}</dt>
+        <dd>{{ i18n.tx('Eigene KI-Agenten, Microcontroller & Smarthome', 'Own AI agents, microcontrollers & smart home') }}</dd>
+        <dt>{{ i18n.tx('WERKSTATT', 'WORKSHOP') }}</dt>
+        <dd>{{ i18n.tx('Holzhandwerk – eigene Projekte planen und bauen', 'Woodworking – planning and building my own projects') }}</dd>
       </dl>
 
       <pre class="dog-ascii" aria-hidden="true" [textContent]="dog"></pre>
+      </div>
     </app-panel>
   `,
   styles: `
@@ -57,6 +63,20 @@ import { Panel } from '../ui/panel';
     }
     app-panel {
       height: 100%;
+    }
+    .wrap {
+      display: grid;
+      grid-template-columns: minmax(200px, 340px) 1fr auto;
+      align-items: center;
+      gap: 1em 2em;
+    }
+    @media (max-width: 700px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+      .dog-ascii {
+        display: none;
+      }
     }
     .trail {
       border: 1px solid var(--p-600);
@@ -109,7 +129,7 @@ import { Panel } from '../ui/panel';
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 0.25em 1em;
-      margin: 1em 0 0;
+      margin: 0;
       font-size: 13px;
 
       dt {
@@ -121,7 +141,7 @@ import { Panel } from '../ui/panel';
       }
     }
     .dog-ascii {
-      margin: 0.8em 0 0;
+      margin: 0;
       font-size: 12px;
       line-height: 1.15;
       color: var(--warn);

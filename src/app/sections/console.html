@@ -1,4 +1,4 @@
-<app-panel index="08" [title]="i18n.tx('Konsole', 'Console')" path="/dev/tty1" [delay]="160" statusText="READY">
+<app-panel index="07" [title]="i18n.tx('Konsole', 'Console')" path="/dev/tty1" [delay]="160" statusText="READY">
   <div class="screen" #screen (click)="focus()">
     @for (line of lines(); track $index) {
       <div class="line" [class]="'line ' + (line.kind ?? '')">

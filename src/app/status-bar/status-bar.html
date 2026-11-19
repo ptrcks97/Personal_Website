@@ -10,13 +10,12 @@
   <span class="cell">
     <span class="led"></span> <span class="hi">ONLINE</span>
   </span>
-  <span class="cell uptime" [title]="i18n.tx('Seit Lehrbeginn August 2014', 'Since apprenticeship start, August 2014')">
-    <span class="dim">{{ i18n.tx('KARRIERE-UPTIME', 'CAREER UPTIME') }}</span> {{ uptime() }}
+  <span class="cell uptime" [title]="i18n.tx('Seit Beginn der Informatiklehre', 'Since the start of my IT apprenticeship')">
+    <span class="dim">{{ i18n.tx('IN DER IT SEIT', 'IN TECH SINCE') }}</span> {{ since }}
+    <span class="dim">·</span> {{ years }} {{ i18n.tx('JAHRE', 'YEARS') }}
   </span>
 
   <span class="spacer"></span>
-
-  <span class="cell clock"><span class="dim">ZRH</span> {{ clock() }}</span>
 
   <div class="switch" role="group" [attr.aria-label]="i18n.tx('Sprache', 'Language')">
     <button type="button" [class.on]="i18n.lang() === 'de'" (click)="i18n.lang.set('de')">DE</button>

@@ -10,7 +10,7 @@ interface Line {
   href?: string;
 }
 
-const FILES = ['about.txt', 'skills.cfg', 'career.log', 'projects/', 'contact.vcf', 'cv.pdf'];
+const FILES = ['about.txt', 'skills.cfg', 'career.log', 'projects/', 'contact.vcf', ...(PROFILE.cv.available ? ['cv.pdf'] : [])];
 
 /** Interaktive Shell mit nützlichen Befehlen und ein paar Easter Eggs. */
 @Component({
@@ -64,7 +64,10 @@ export class Console {
       if (PROFILE.cv.available) {
         this.push({ text: this.tx('Lebenslauf herunterladen ↗', 'Download resume ↗'), href: PROFILE.cv.file, kind: 'ok' });
       } else {
-        this.push({ text: this.tx('cv.pdf: Upload ausstehend – bitte später erneut versuchen.', 'cv.pdf: upload pending – please try again later.'), kind: 'warn' });
+        this.push({
+          text: this.tx('Lebenslauf gerne auf Anfrage per E-Mail →', 'Resume available on request by email →'),
+          href: `mailto:${PROFILE.email}`,
+        });
       }
     },
     ls: (args) => {

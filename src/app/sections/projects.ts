@@ -1,5 +1,6 @@
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, effect, inject, signal, untracked, viewChild } from '@angular/core';
 import { I18n } from '../core/i18n';
+import { SystemState } from '../core/system';
 import { PROFILE, Project } from '../data/profile';
 import { Panel } from '../ui/panel';
 
@@ -16,6 +17,18 @@ export class Projects {
   protected readonly selected = signal<Project | null>(null);
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  private readonly system = inject(SystemState);
+
+  constructor() {
+    effect(() => {
+      const id = this.system.openProject();
+      if (!id) return;
+      untracked(() => {
+        this.system.openProject.set(null);
+        this.open(id);
+      });
+    });
+  }
 
   open(id: string): void {
     const project = this.projects.find((p) => p.id === id);

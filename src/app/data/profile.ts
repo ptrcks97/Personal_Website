@@ -21,6 +21,8 @@ export interface CareerEntry {
   org: string;
   place: string;
   role: L;
+  /** Optionale Zusatzzeile im Log, z. B. Schwerpunkt oder Abschluss */
+  note?: L;
 }
 
 export interface ProjectMedia {
@@ -50,7 +52,7 @@ export const PROFILE = {
   linkedin: 'https://www.linkedin.com/in/patrick-sch%C3%B6pfer-764a85295/',
   github: 'https://github.com/ptrcks97',
   /** Lebenslauf: PDF nach public/cv/ legen und available auf true setzen. */
-  cv: { file: 'cv/Lebenslauf_Patrick_Schoepfer.pdf', available: false },
+  cv: { file: 'cv/Lebenslauf_Patrick_Schoepfer.pdf', available: true },
   careerStart: '2014-08-01',
 
   /** Angaben fürs Impressum. street optional – null blendet die Zeile aus. */
@@ -59,18 +61,32 @@ export const PROFILE = {
     zip: '6443',
     city: 'Morschach',
     country: { de: 'Schweiz', en: 'Switzerland' } as L,
-    updated: '2026-10',
+    updated: '2026-11',
   },
 
   bio: {
-    de: 'Ich baue KI-Systeme, die Menschen tatsächlich weiterbringen – von eigenen AI Agents über Machine Learning bis hin zu VR. Mein Weg führte von der Informatiklehre bei Siemens über die Pädagogische Hochschule zum Computer-Science-Bachelor an der HSLU. Darum kann ich Technik nicht nur bauen, sondern auch verständlich erklären.',
-    en: 'I build AI systems that genuinely move people forward – from custom AI agents and machine learning to VR. My path led from an IT apprenticeship at Siemens through teacher training to a Computer Science bachelor at HSLU. That is why I can not only build technology, but also explain it clearly.',
+    de: 'Ich baue KI-Systeme, die Menschen tatsächlich weiterbringen – von eigenen AI Agents über Machine Learning bis hin zu VR. Mein Weg führte von der Informatiklehre mit Berufsmaturität bei Siemens über das Studium zur Sekundarlehrperson an der PH Luzern zum Informatik-Bachelor an der HSLU. Darum kann ich Technik nicht nur bauen, sondern auch verständlich erklären.',
+    en: 'I build AI systems that genuinely move people forward – from custom AI agents and machine learning to VR. My path led from an IT apprenticeship with vocational baccalaureate at Siemens through secondary teacher training at PH Luzern to a Computer Science bachelor at HSLU. That is why I can not only build technology, but also explain it clearly.',
   } as L,
 
   availability: {
     onsite: true,
     remote: true,
   },
+
+  /**
+   * Optionales Zitat einer Referenzperson (Vorgesetzte/r, Dozent/in).
+   * null = Abschnitt wird ausgeblendet. Beispiel:
+   * { text: { de: '…', en: '…' }, author: 'Vorname Nachname', role: { de: 'Teamleiter, Finnova', en: 'Team Lead, Finnova' } }
+   */
+  testimonial: null as { text: L; author: string; role: L } | null,
+
+  /** Gesprochene Sprachen (laut Lebenslauf) */
+  spokenLanguages: [
+    { de: 'Deutsch (Muttersprache)', en: 'German (native)' },
+    { de: 'Englisch (gut)', en: 'English (good)' },
+    { de: 'Französisch (Schulkenntnisse)', en: 'French (basic)' },
+  ] as L[],
 
   traits: [
     { proc: 'friendliness.d', label: { de: 'Freundlich', en: 'Friendly' } },
@@ -108,9 +124,10 @@ export const PROFILE = {
       org: 'Siemens Schweiz AG',
       place: 'Zug',
       role: {
-        de: 'Lehre Informatiker Applikationsentwicklung',
-        en: 'Apprenticeship, IT Specialist Application Development',
+        de: 'Lehre Informatiker EFZ Applikationsentwicklung',
+        en: 'Apprenticeship, IT Specialist (EFZ) Application Development',
       },
+      note: { de: 'Mit Berufsmaturität abgeschlossen', en: 'Completed with vocational baccalaureate (BM)' },
     },
     {
       id: 'service',
@@ -128,7 +145,11 @@ export const PROFILE = {
       kind: 'edu',
       org: 'PH Luzern',
       place: 'Luzern',
-      role: { de: 'Studium Pädagogische Hochschule', en: 'Studies, University of Teacher Education' },
+      role: { de: 'Studium Sekundarlehrperson', en: 'Studies, secondary school teacher' },
+      note: {
+        de: '2019 zusätzlich Klassenassistenz bei Intermezzo – Förderung von Kindern mit Lernschwäche',
+        en: '2019 also class assistant at Intermezzo – supporting children with learning difficulties',
+      },
     },
     {
       id: 'hslu',
@@ -137,7 +158,8 @@ export const PROFILE = {
       kind: 'edu',
       org: 'HSLU',
       place: 'Luzern',
-      role: { de: 'BSc Computer Science', en: 'BSc Computer Science' },
+      role: { de: 'Bachelor Informatik (Teilzeit)', en: 'BSc Computer Science (part-time)' },
+      note: { de: 'Abgeschlossen · Bachelorarbeit mit Note 6.0', en: 'Completed · bachelor thesis graded 6.0 (top grade)' },
     },
     {
       id: 'finnova-intern',
@@ -146,7 +168,11 @@ export const PROFILE = {
       kind: 'work',
       org: 'Finnova Bankware AG',
       place: '',
-      role: { de: 'Praktikant Entwicklung Informatik', en: 'Software Development Intern' },
+      role: {
+        de: 'Praktikant Entwicklung Informatik',
+        en: 'Software Development Intern',
+      },
+      note: { de: 'Teilzeitpensum, parallel zum Studium', en: 'Part-time, alongside studies' },
     },
     {
       id: 'finnova',
@@ -156,6 +182,10 @@ export const PROFILE = {
       org: 'Finnova Bankware AG',
       place: '',
       role: { de: 'AI Software Engineer', en: 'AI Software Engineer' },
+      note: {
+        de: 'Entwicklung LLM-basierter Funktionen für firmeninterne Tools',
+        en: 'Building LLM-based features for internal company tools',
+      },
     },
   ] as CareerEntry[],
 

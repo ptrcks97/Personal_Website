@@ -9,7 +9,7 @@ import { Panel } from '../ui/panel';
   imports: [Panel],
   template: `
     <app-panel
-      index="07"
+      index="06"
       [title]="i18n.tx('Uplink', 'Uplink')"
       path="/etc/contact"
       [delay]="80"
@@ -38,19 +38,15 @@ import { Panel } from '../ui/panel';
         </li>
       </ul>
 
-      <div class="cv">
-        <div>
-          <p class="label dim">{{ i18n.tx('LEBENSLAUF', 'RESUME') }}</p>
-          <p class="file">{{ fileName }}</p>
-        </div>
-        @if (p.cv.available) {
+      @if (p.cv.available) {
+        <div class="cv">
+          <div>
+            <p class="label dim">{{ i18n.tx('LEBENSLAUF', 'RESUME') }}</p>
+            <p class="file">{{ fileName }}</p>
+          </div>
           <a class="btn" [href]="p.cv.file" download>⬇ {{ i18n.tx('Download', 'Download') }}</a>
-        } @else {
-          <button class="btn" type="button" disabled>
-            {{ i18n.tx('Upload ausstehend', 'Upload pending') }}
-          </button>
-        }
-      </div>
+        </div>
+      }
     </app-panel>
   `,
   styles: `

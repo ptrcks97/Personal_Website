@@ -22,13 +22,16 @@ function write(storage: () => Storage, key: string, value: string): void {
 export class SystemState {
   readonly reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  readonly crt = signal(read(() => localStorage, CRT_KEY) !== 'off');
+  /** CRT-Effekte sind standardmässig aus (ruhiger, lesbarer) und nur per Opt-in an. */
+  readonly crt = signal(read(() => localStorage, CRT_KEY) === 'on');
   /** Boot-Sequenz läuft (beim ersten Besuch pro Session ausführlich, sonst kurz). */
   readonly booting = signal(true);
   readonly fastBoot = signal(this.reducedMotion || read(() => sessionStorage, BOOT_KEY) === '1');
   readonly unixMode = signal(false);
   /** Impressum-Fenster; auch per URL /#impressum direkt verlinkbar. */
   readonly legalOpen = signal(location.hash === '#impressum');
+  /** Projekt-ID, deren Detailfenster geöffnet werden soll (z. B. vom Highlight im Ident-Panel). */
+  readonly openProject = signal<string | null>(null);
 
   constructor() {
     effect(() => {

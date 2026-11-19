@@ -56,6 +56,8 @@
               "@fontsource/ibm-plex-mono/latin-500.css",
               "@fontsource/ibm-plex-mono/latin-600.css",
               "@fontsource/vt323/latin-400.css",
+              "@fontsource/ibm-plex-sans/latin-400.css",
+              "@fontsource/ibm-plex-sans/latin-500.css",
               "src/styles.scss"
             ]
           },

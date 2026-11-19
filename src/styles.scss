@@ -11,7 +11,7 @@
   --p-200: #8dffaa; /* Fliesstext */
   --p-300: #39ff6a; /* Akzent */
   --p-400: #22c24d; /* sekundär */
-  --p-500: #157a31; /* gedimmt */
+  --p-500: #2a9d4a; /* gedimmt – Kontrast ≥ 4.5:1 auf --bg */
   --p-600: #0d4a1e; /* Linien */
   --p-700: #082b12; /* Flächen */
 
@@ -23,6 +23,8 @@
 
   --font-display: 'VT323', ui-monospace, monospace;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Für längere Fliesstexte – besser lesbar als Monospace */
+  --font-prose: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --gutter: clamp(12px, 2.4vw, 28px);
   --radius: 2px;
@@ -146,6 +148,15 @@ a.btn {
 
 .dim {
   color: var(--p-500);
+}
+
+/* Fliesstext: Proportionalschrift, etwas grösser und heller */
+.prose {
+  font-family: var(--font-prose);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--p-100);
+  text-shadow: none;
 }
 
 .hi {

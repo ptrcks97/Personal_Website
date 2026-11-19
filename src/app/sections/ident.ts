@@ -35,12 +35,25 @@ import { Panel } from '../ui/panel';
             <dt>{{ i18n.tx('AKTUELL', 'CURRENT') }}</dt>
             <dd>AI Software Engineer &#64; Finnova Bankware AG</dd>
             <dt>{{ i18n.tx('AUSBILDUNG', 'EDUCATION') }}</dt>
-            <dd>BSc Computer Science · HSLU</dd>
+            <dd>{{ i18n.tx('BSc Informatik · HSLU · Bachelorarbeit 6.0', 'BSc Computer Science · HSLU · thesis grade 6.0') }}</dd>
+            <dt>{{ i18n.tx('SPRACHEN', 'LANGUAGES') }}</dt>
+            <dd>
+              @for (l of p.spokenLanguages; track $index; let last = $last) {
+                {{ i18n.t(l) }}{{ last ? '' : ' · ' }}
+              }
+            </dd>
+            <dt>HIGHLIGHT</dt>
+            <dd>
+              <button type="button" class="featured" (click)="system.openProject.set(featured.id)">
+                {{ featured.name }} <span class="dim">· {{ i18n.t(featured.tagline) }}</span>
+                <span class="badge">{{ i18n.t(featured.status) }}</span> ▸
+              </button>
+            </dd>
           </dl>
         </div>
       </div>
 
-      <p class="bio">{{ i18n.t(p.bio) }}</p>
+      <p class="bio prose">{{ i18n.t(p.bio) }}</p>
 
       <div class="actions">
         <button class="btn" type="button" (click)="system.scrollTo('uplink')">
@@ -138,6 +151,32 @@ import { Panel } from '../ui/panel';
         color: var(--p-300);
       }
     }
+    .featured {
+      padding: 0;
+      background: none;
+      border: 0;
+      border-bottom: 1px dashed var(--p-500);
+      text-align: left;
+      cursor: pointer;
+      color: var(--p-100);
+
+      &:hover,
+      &:focus-visible {
+        border-bottom-color: var(--p-300);
+        color: var(--p-300);
+      }
+      .badge {
+        display: inline-block;
+        white-space: nowrap;
+        margin-left: 0.3em;
+        padding: 0 0.4em;
+        background: var(--p-300);
+        color: var(--bg);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-shadow: none;
+      }
+    }
     .bio {
       margin: 1.4em 0 1.2em;
       padding-left: 1em;
@@ -163,4 +202,5 @@ export class Ident {
   protected readonly i18n = inject(I18n);
   protected readonly system = inject(SystemState);
   protected readonly p = PROFILE;
+  protected readonly featured = PROFILE.projects[0];
 }

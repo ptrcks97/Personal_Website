@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-areas:
-    'ident ident ident ident ident ident proc proc proc sens sens sens'
+    'ident ident ident ident ident ident ident ident proc proc proc proc'
     'skills skills skills skills skills career career career career career career career'
     'projects projects projects projects projects projects projects projects projects projects projects projects'
-    'uplink uplink uplink uplink uplink console console console console console console console';
+    'uplink uplink uplink uplink uplink console console console console console console console'
+    'sens sens sens sens sens sens sens sens sens sens sens sens';
   gap: var(--gutter);
   padding: var(--gutter);
   max-width: 1600px;
@@ -41,17 +42,18 @@
   .dash {
     grid-template-areas:
       'ident ident ident ident ident ident ident ident proc proc proc proc'
-      'sens sens sens sens skills skills skills skills skills skills skills skills'
       'career career career career career career career career career career career career'
+      'skills skills skills skills skills skills skills skills skills skills skills skills'
       'projects projects projects projects projects projects projects projects projects projects projects projects'
-      'uplink uplink uplink uplink uplink console console console console console console console';
+      'uplink uplink uplink uplink uplink console console console console console console console'
+      'sens sens sens sens sens sens sens sens sens sens sens sens';
   }
 }
 
 @media (max-width: 900px) {
   .dash {
     grid-template-columns: 1fr;
-    grid-template-areas: 'ident' 'proc' 'skills' 'career' 'projects' 'sens' 'uplink' 'console';
+    grid-template-areas: 'ident' 'projects' 'career' 'skills' 'proc' 'uplink' 'sens' 'console';
   }
 }
 

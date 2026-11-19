@@ -10,7 +10,7 @@ const SEGMENTS = 20;
   selector: 'app-skills',
   imports: [Panel],
   template: `
-    <app-panel index="04" [title]="i18n.tx('Ressourcen', 'Resources')" path="/proc/skills" [delay]="80">
+    <app-panel index="03" [title]="i18n.tx('Ressourcen', 'Resources')" path="/proc/skills" [delay]="80">
       <div class="cols">
         @for (group of groups; track group.key) {
           <section>

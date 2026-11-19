@@ -1,4 +1,4 @@
-<app-panel index="06" [title]="i18n.tx('Projekte', 'Projects')" path="/mnt/projects" [delay]="80">
+<app-panel index="05" [title]="i18n.tx('Projekte', 'Projects')" path="/mnt/projects" [delay]="80">
   <p class="dim intro">
     $ mount | grep projects &nbsp;·&nbsp; {{ projects.length }} {{ i18n.tx('Volumes eingehängt', 'volumes mounted') }}
   </p>
@@ -49,7 +49,7 @@
         <span class="status">{{ i18n.t(p.status) }}</span>
         <h3>{{ p.name }}</h3>
         <p class="tagline">{{ i18n.t(p.tagline) }}</p>
-        <p class="desc">{{ i18n.t(p.description) }}</p>
+        <p class="desc prose">{{ i18n.t(p.description) }}</p>
 
         @if (p.media.length) {
           <div class="media">
